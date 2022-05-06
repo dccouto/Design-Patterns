@@ -126,6 +126,7 @@ public class TestaImposto{
 
 	public static void main(String[] args) {
 		BigDecimal orcamento = BigDecimal.valueOf(100);
+		//pode ir componte quando impostos tiver, e encerra com null quando não tem mais impostos
 		System.out.println(new CalculadoraDeImpostos().calcular(orcamento, new ICMS(new ISS(null))));
 	}
 }
