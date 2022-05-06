@@ -59,6 +59,87 @@ public class DesignPatternsAdapterApplication {
 
 ## Decorator
 
+Nesse design, uma classe compõe ela mesma.
+
+
+
+```
+package br.com.couto.decorators;
+
+import java.math.BigDecimal;
+
+public abstract class ImpostoDecorator {
+	
+	private ImpostoDecorator outro;
+	
+	public ImpostoDecorator(ImpostoDecorator imposto) {
+		this.outro = imposto;
+	}
+	
+	protected abstract BigDecimal realizaCalculo(BigDecimal orcamento);
+	
+	public BigDecimal calcular(BigDecimal orcamento) {
+		BigDecimal valorDoImposto = realizaCalculo(orcamento);
+		BigDecimal valorOutroImposto = BigDecimal.ZERO;
+		
+		if(outro != null) {
+			valorOutroImposto = outro.realizaCalculo(orcamento);
+		}
+		return valorDoImposto.add(valorOutroImposto);
+	} 
+
+}
+
+class ISS extends ImpostoDecorator{
+	public ISS(ImpostoDecorator imposto) {
+		super(imposto);
+	}
+
+	@Override
+	protected BigDecimal realizaCalculo(BigDecimal orcamento) {
+		return orcamento.multiply(new BigDecimal("0.1"));
+	}
+	
+}
+
+class ICMS extends ImpostoDecorator{
+	public ICMS(ImpostoDecorator imposto) {
+		super(imposto);
+	}
+
+	@Override
+	protected BigDecimal realizaCalculo(BigDecimal orcamento) {
+		return orcamento.multiply(new BigDecimal("0.15"));
+	}
+	
+}
+
+
+
+//Outro pacote
+package br.com.couto.decorators;
+
+import java.math.BigDecimal;
+
+
+public class TestaImposto{
+
+	public static void main(String[] args) {
+		BigDecimal orcamento = BigDecimal.valueOf(100);
+		System.out.println(new CalculadoraDeImpostos().calcular(orcamento, new ICMS(new ISS(null))));
+	}
+}
+
+class CalculadoraDeImpostos {
+	
+	public BigDecimal calcular(BigDecimal orcamento, ImpostoDecorator imposto) {
+		return imposto.calcular(orcamento);
+	}
+	
+}
+
+```
+
 ## Composite
 
 ## Facade
