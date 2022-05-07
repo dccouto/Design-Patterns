@@ -217,5 +217,138 @@ interface Orcavel{
 ```
 
 ## Facade
+O Facade esconde a implementação do método, disponibilizando apenas um serviço para o cliente consumir.
+Com isso, toda a complexidade do código fica escondida.
+```
+public class TestaFacade {
+
+	public static void main(String[] args) {
+		
+		GeraPedido geraPedido = new GeraPedido("Compra de Notebook");
+		
+		RealizaVendaFacade vendaFacade = new RealizaVendaFacade(
+				List.of(new Imprime(), new Estoque(), new RegistraLog()));
+		
+		//O executar gera várias tarefas, porém é escondido no encapsulamento da classe vendaFacade
+		vendaFacade.executar(geraPedido);
+
+	}
+}
+
+class GeraPedido{
+	private String pedido;
+
+	public GeraPedido(String pedido) {
+		this.pedido = pedido;
+	}
+	
+	public String getPedido() {
+		return pedido;
+	}
+}
+
+class RealizaVendaFacade {
+	private List<ExecutaAcao> acoesAposVenda;
+
+	//injeção de dependência
+	public RealizaVendaFacade(List<ExecutaAcao> acoesAposVenda) {
+		this.acoesAposVenda = acoesAposVenda;
+	}
+	
+	public void executar(GeraPedido geraPedido) {
+		this.acoesAposVenda.forEach(acao -> acao.executar(geraPedido.getPedido()));
+	}
+	
+}
+
+interface ExecutaAcao{
+	void executar(String texto);
+}
+
+class Imprime implements ExecutaAcao{
+	
+	@Override
+	public void executar(String texto) {
+		System.out.println("Executando a impressão do pedido: " + texto);
+	}
+}
+
+class RegistraLog implements ExecutaAcao{
+
+	@Override
+	public void executar(String texto) {
+		System.out.println("Executando o registro de log do pedido: " + texto);
+	}
+}
+
+class Estoque implements ExecutaAcao{
+
+	@Override
+	public void executar(String texto) {
+		System.out.println("Executando a baixa de estoque do pedido: " + texto);
+	}
+}
+```
 
 ## Proxy
+O Proxy soluciona o proplema de quando uma requisição ou serviço externo é muito lento e não temos acesso a API de terceiros.
+Caso precisamos utilizar o mesmo valor mais vezes durante a execução, podemos criar o proxy para guardar o valor que foi acessado,
+da primeira vez, assim aumentamos a performace do sistema.
+```
+public class TestaProxy {
+
+	public static void main(String[] args) {
+
+		Orcamento orcamento = new Orcamento(new BigDecimal(5000));
+		//Sem utilizar o proxy, fica muito lento
+		//System.out.println(orcamento.getValor());
+		//System.out.println(orcamento.getValor());
+		//System.out.println(orcamento.getValor());
+		
+		//Com proxy, apenas a primeira requisição é lenta as demais estão em "cache"
+		OrcamentoProxy proxy = new OrcamentoProxy(orcamento);
+		System.out.println(proxy.getValor());
+		System.out.println(proxy.getValor());
+		System.out.println(proxy.getValor());
+		System.out.println(proxy.getValor());
+	}
+
+}
+
+class Orcamento {
+	private BigDecimal valor;
+	
+	protected Orcamento() {}
+	public Orcamento(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public BigDecimal getValor() {
+		try {
+			//simulando uma requisição lenta a algum serviço
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+		return valor;
+	}
+}
+
+class OrcamentoProxy extends Orcamento{
+	private BigDecimal valor;
+	private Orcamento orcamento;
+	
+	public OrcamentoProxy(Orcamento orcamento) {
+		this.orcamento = orcamento;
+	}
+	
+	@Override
+	public BigDecimal getValor() {
+		//realizando o proxy (cache)
+		if(this.valor == null) {
+			this.valor = this.orcamento.getValor();
+		}
+		return valor;
+	}
+}
+```
