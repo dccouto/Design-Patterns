@@ -142,6 +142,79 @@ class CalculadoraDeImpostos {
 ```
 
 ## Composite
+Um objeto compõe o outro.
+Nesse exemplo é adicionando orçamentos mais antigos ao orçamento mais atual, fazendo uma composição.
+```
+public class TestaComposicao {
+	
+	public static void main(String[] args) {
+		Orcamento antigo = new Orcamento();
+		antigo.adicionarItem(new ItemOrcamento("Notebook", BigDecimal.valueOf(5000.)));
+		
+		Orcamento maisAntigo = new Orcamento();
+		maisAntigo.adicionarItem(new ItemOrcamento("Teclado", BigDecimal.valueOf(150.)));
+		
+		Orcamento novo = new Orcamento();
+		novo.adicionarItem(new ItemOrcamento("Monitor", BigDecimal.valueOf(1000.)));
+		
+		novo.adicionarItem(antigo);
+		novo.adicionarItem(maisAntigo);
+		
+		System.out.println(novo.getValor());
+	}
+
+}
+
+class ItemOrcamento implements Orcavel{
+	private String descricao;
+	private BigDecimal valor;
+	
+	public ItemOrcamento(String descricao, BigDecimal valor) {
+		this.descricao = descricao;
+		this.valor = valor;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+
+	@Override
+	public BigDecimal getValor() {
+		return valor;
+	}
+	
+}
+
+
+class Orcamento implements Orcavel{
+
+	private BigDecimal valor;
+	private List<Orcavel> itens;
+	
+	public Orcamento() {
+		this.valor = BigDecimal.ZERO;
+		this.itens =  new ArrayList<>();
+	}
+
+	@Override
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public List<Orcavel> getOrcamento() {
+		return itens;
+	}
+	
+	public void adicionarItem(Orcavel item) {
+		this.valor = valor.add(item.getValor());
+		this.itens.add(item);
+	}
+	
+}
+
+interface Orcavel{
+	BigDecimal getValor();
+}
+```
 
 ## Facade
 
