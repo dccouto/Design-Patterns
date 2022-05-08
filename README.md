@@ -325,7 +325,7 @@ class Orcamento {
 
 	public BigDecimal getValor() {
 		try {
-			//simulando uma requisição lenta a algum serviço
+			//simulando uma requisição lenta para algum serviço
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
