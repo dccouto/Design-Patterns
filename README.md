@@ -2,7 +2,7 @@
 Este projeto visa demonstrar de maneira simples alguns exemplos de Design Patterns estruturais.
 
 ## Adapter
-ESconde a real implementação da classe, disponibilizando apenas a interface para ser utilizada. Quando instanciar a classe, deverá passar o objeto que implementa o adapter. Assim ela não fica engessada com uma única implementação da interface.
+Esconde a real implementação da classe, disponibilizando apenas a interface para ser utilizada. Quando instanciar a classe, deverá passar o objeto que implementa o adapter. Assim ela não fica engessada com uma única implementação da interface.
 Exemplo:
 
 ```
@@ -34,7 +34,7 @@ public class ImprimirService {
 
 	private AdaptadorInterface adaptadorInterface;
 	
-		public ImprimirService(AdaptadorInterface adaptadorInterface) {
+	public ImprimirService(AdaptadorInterface adaptadorInterface) {
 		this.adaptadorInterface = adaptadorInterface;
 	}
 
