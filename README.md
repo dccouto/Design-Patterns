@@ -352,3 +352,25 @@ class OrcamentoProxy extends Orcamento{
 	}
 }
 ```
+## Singleton
+O Singleton garante uma única instancia de um objeto para a aplicação
+
+```
+/**
+* @see <a href="https://stackoverflow.com/a/24018148">
+*
+*/
+public class SingletonLazyHolder {
+
+	private static class InstanceHolder {
+		public static SingletonLazyHolder instancia = new SingletonLazyHolder();
+	}
+	private SingletonLazyHolder() {
+	}
+
+	public static SingletonLazyHolder getInstance() {
+		return InstanceHolder.instancia;
+	}
+}
+```
+
