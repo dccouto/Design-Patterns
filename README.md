@@ -356,6 +356,7 @@ class OrcamentoProxy extends Orcamento{
 	}
 }
 ```
+# Criacional
 ## Singleton
 O Singleton garante uma única instancia de um objeto para a aplicação
 
