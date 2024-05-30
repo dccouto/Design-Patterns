@@ -221,8 +221,8 @@ interface Orcavel{
 ```
 
 ## Facade
-O Facade esconde a implementação do método, disponibilizando apenas um serviço para o cliente consumir.
-Com isso, toda a complexidade do código fica escondida.
+O Facade define uma interface e esconde a implementação do classes (subsistemas) complexos, disponibilizando apenas um contrato para o cliente consumir.
+Com isso, toda a complexidade do código fica escondida e sua utilização simplificada.
 ```
 public class TestaFacade {
 
@@ -377,4 +377,7 @@ public class SingletonLazyHolder {
 	}
 }
 ```
+
+## Repository
+Faz a abstração ("meio de campo") entre o domínio da aplicação e a camada de dados.
 
