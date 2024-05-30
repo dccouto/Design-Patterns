@@ -356,6 +356,10 @@ class OrcamentoProxy extends Orcamento{
 	}
 }
 ```
+
+## Repository
+Faz a abstração ("meio de campo") entre o domínio da aplicação e a camada de dados.
+
 # Criacional
 ### Singleton
 O Singleton garante uma única instancia de um objeto para a aplicação
@@ -379,6 +383,4 @@ public class SingletonLazyHolder {
 }
 ```
 
-## Repository
-Faz a abstração ("meio de campo") entre o domínio da aplicação e a camada de dados.
 
