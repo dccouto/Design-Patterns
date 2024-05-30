@@ -5,7 +5,7 @@ Existem 3 tipos definidos de design patterns como total de 23 padrões catalogad
 
 # Estrutural
 
-## Adapter
+### Adapter
 Esconde a real implementação da classe, disponibilizando apenas a interface para ser utilizada. Quando instanciar a classe, deverá passar o objeto que implementa o adapter. Assim ela não fica engessada com uma única implementação da interface.
 Exemplo:
 
@@ -61,7 +61,7 @@ public class DesignPatternsAdapterApplication {
 }
 ```
 
-## Decorator
+### Decorator
 
 Nesse design, uma classe compõe ela mesma.
 
@@ -145,7 +145,7 @@ class CalculadoraDeImpostos {
 
 ```
 
-## Composite
+### Composite
 Um objeto compõe o outro.
 Nesse exemplo é adicionando orçamentos mais antigos ao orçamento mais atual, fazendo uma composição.
 ```
@@ -220,7 +220,7 @@ interface Orcavel{
 }
 ```
 
-## Facade
+### Facade
 O Facade define uma interface e esconde a implementação do classes (subsistemas) complexos, disponibilizando apenas um contrato para o cliente consumir.
 Com isso, toda a complexidade do código fica escondida e sua utilização simplificada.
 ```
@@ -294,7 +294,7 @@ class Estoque implements ExecutaAcao{
 }
 ```
 
-## Proxy
+### Proxy
 O Proxy soluciona o proplema de quando uma requisição ou serviço externo é muito lento e não temos acesso a API de terceiros.
 Caso precisamos utilizar o mesmo valor mais vezes durante a execução, podemos criar o proxy para guardar o valor que foi acessado,
 da primeira vez, assim aumentamos a performace do sistema.
@@ -357,7 +357,7 @@ class OrcamentoProxy extends Orcamento{
 }
 ```
 # Criacional
-## Singleton
+### Singleton
 O Singleton garante uma única instancia de um objeto para a aplicação
 
 ```
