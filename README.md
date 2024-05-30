@@ -1,5 +1,9 @@
-# Design-Patterns-Estruturais
-Este projeto visa demonstrar de maneira simples alguns exemplos de Design Patterns estruturais.
+# Design Patterns
+Este projeto visa demonstrar de maneira simples alguns exemplos de Design Patterns.
+Existem 3 tipos definidos de design patterns como total de 23 padrões catalogados, o **Criacional**, **Estrutural** e **Comportamental**
+![image](https://github.com/dccouto/Design-Patterns---Estruturais/assets/53017748/3de78253-7198-42ad-8116-ff3e092089ba)
+
+# Estrutural
 
 ## Adapter
 Esconde a real implementação da classe, disponibilizando apenas a interface para ser utilizada. Quando instanciar a classe, deverá passar o objeto que implementa o adapter. Assim ela não fica engessada com uma única implementação da interface.
